@@ -4,6 +4,6 @@ class Ruche:
         self.pos = (500, 500)
         self.abeilles = []
 
-    def bannir(self, fourmi):
-        self.abeilles.remove(fourmi)
+    def bannir(self, bee):
+        self.abeilles.remove(bee)
 
