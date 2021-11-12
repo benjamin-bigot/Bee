@@ -96,7 +96,7 @@ def fleursManquantes(chemin, listeFleur):
 
 
 def mutation(population):
-    x = random.randint(len(population))
+    x = random.randint(0, len(population))
     chemin = population[x].get_chemin()
     rand = random.randint(1, len(chemin - 2))
     if rand == 1:
@@ -108,9 +108,29 @@ def mutation(population):
         chemin[rand] = chemin[rand - 1]
         chemin[rand - 1] = tmp
     population[x].set_chemin(chemin)
+    return population
 
 
+def bannir_abeille(population):
+    population = trier(population)
+    for i in range(len(population) - 20, len(population)):
+        del population[i]
+    return population
 
 
-
+def new_generation(moyenne_precedente, liste_fleur, population):
+    bestList = []
+    if abs(moyenne_precedente - distanceMoyenne(population)):
+        population = mutation(population)
+    population = trier(population)
+    for i in range(20):
+        bestList.append(population[i])
+    for i in bestList:
+        for j in bestList:
+            if i != j:
+                population = crossover(i, j, population, liste_fleur)
+                bestList.pop(i)
+                bestList.pop(j)
+    population = bannir_abeille(trier(population))
+    return population
 

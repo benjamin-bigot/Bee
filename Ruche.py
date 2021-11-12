@@ -6,6 +6,3 @@ class Ruche:
     def get_pos(self):
         return self.__pos
 
-    def bannir(self, bee):
-        self.abeilles.remove(bee)
-
