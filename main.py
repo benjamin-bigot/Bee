@@ -134,3 +134,21 @@ def new_generation(moyenne_precedente, liste_fleur, population):
     population = bannir_abeille(trier(population))
     return population
 
+
+def iteration(liste_fleur):
+    liste_moyenne = []
+    firstPop = []
+    firstPop = generer_chemin(firstPop, liste_fleur)
+    liste_moyenne.append(distanceMoyenne(firstPop))
+    for i in range(2, 1001):
+        moyenne_precedente = liste_moyenne[-1]
+        newPop = new_generation(moyenne_precedente, liste_fleur, firstPop)
+        liste_moyenne.append(distanceMoyenne(newPop))
+        if i != 1000:
+            firstPop = newPop
+            newPop = []
+    return newPop, liste_moyenne
+
+
+
+
